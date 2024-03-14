@@ -1,0 +1,6 @@
+{
+    "problems.defaultViewMode": "tree",
+    "problems.sortOrder": "severity",
+    "problems.showCurrentInStatus": false,
+    "task.verboseLogging": true
+}
