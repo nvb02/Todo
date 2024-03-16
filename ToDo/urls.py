@@ -20,6 +20,6 @@ from base.views import home, create #importing create function that is rendering
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', home),
-    path('create/', create,name='home') #every path is a url.. 2 arguments is necessary inside the path --> 1. url name, 2. function or view to be called through url (the function must include request and response which is render that displays create.html))
+    path('home/', home,name='home'),
+    path('create/', create,name='create') #every path is a url.. 2 arguments is necessary inside the path --> 1. url name, 2. function or view to be called through url (the function must include request and response which is render that displays create.html))
 ]
