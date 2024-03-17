@@ -18,3 +18,27 @@ def create(request): #receives arguments such as request body,user,data,nature a
         Todo.objects.create(name=name,description=description,status=status) # making a query through ORM, using or calling create method to query the method to create the data by sending value from each of the above defined variables to each of the parameters on the fields of the model.
         return redirect('home') # the redirect function is called from django.shortcuts class that requests for certain url (home in this case, which is defined as the name in the path of urls.py because for internal calling for redirection or calling url inside the project, url itself cannot be passed and the name parameter is used in the path statement of urls.py where we use the get method to fetch the value to be returned) and shows the response of the url on the webpage.
     return render(request,'create.html') #render function used to display html file as a type of httpresponse as a template. this is a GET method
+
+def edit(request,pk): #defining edit function for an edit page and adding pk parameter to fetch a unique ID for the particular data to be edited from the home page (index.html)
+    todo = Todo.objects.get(id=pk) #getting the value of ID field which is unique from Todo table or model that is equal to the value of pk parameter received from the front-end.
+    if request.method == 'POST': #will change data only if post request comes leaving the get request condition, calling the method method of the request function.
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        todo.name = name
+        todo.description = description
+        todo.status = status #transferring the data inserted by the user to the field of the specific data provided with unique ID in the table or model.
+        todo.save() #saving the changes made into the database through the save method.
+        return redirect('home') #once saved, the page is redirected to home or index.html        
+    content = {'todo':todo} # passing the received data from db as a dictionary to be sent to front-end.
+    return render(request,'edit.html', context = content) #passing the dictionary content to the edit.html file.
+
+def delete(request,pk):
+    todo = Todo.objects.get(id=pk)
+    todo.delete() # deleting the data of the ID that matches with the PK sent from the front-end.
+    return redirect('home')
+
+def deleteall(request):
+    todo = Todo.objects.all()
+    todo.delete()
+    return redirect('home')

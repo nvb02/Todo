@@ -8,7 +8,7 @@
     <title>Home</title>
 </head>
 <body>
-    {% include 'nav.html' %} 
+    {% include 'nav2.html' %} 
     <table class="table">
         <thead>
           <tr>
@@ -26,8 +26,8 @@
                     <td>{{todo.name}}</td>
                     <td>{{todo.description}}</td>
                     <td>{{todo.status}}</td>
-                    <td><button type="button" class="btn btn-warning">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button></td>
+                    <td><a href = "{% url 'edit' pk=todo.id %}"><button type="button" class="btn btn-warning">Edit</button></a>
+                        <a href = "{% url 'delete' pk=todo.id %}"><button type="button" class="btn btn-danger">Delete</button></a></td>
                 </tr>
             {% endfor %}
         </tbody>
